@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>03_for</title>
+    <style>
+    #container{
+        width: 800px;
+        height: 400px;
+        position: relative;
+        overflow: hidden;
+        background: url(img/bg.png) center bottom no-repeat;
+        margin-bottom: 10px;
+    }
+    .btn{
+        width: 100px;
+        height: 40px;
+        font-size: 16px;
+        background-color: #DDD;
+        border-radius: 10px;
+        text-align: center;
+        line-height: 2.5;
+        float: left;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+    .fade-in{
+        animation: fade-in 1s ease 0s 1 forwards normal;
+    }
+    @keyframes fade-in {
+        0%{opacity:0;}
+        100%{opacity:1;}
+    }
+
+    </style>
+</head>
+<body>
+<div id="container">
+</div>
+<div id="dinoBtn" class="btn">DINO</div>
+<div id="stegoBtn" class="btn">STEGO</div>
+<div id="randomBtn" class="btn">RANDOM</div>
+<div id="allBtn" class="btn">All</div>
+
+
+<script>
+var container = document.querySelector("#container");
+
+document.querySelector("#dinoBtn").addEventListener('click', function(e){
+
+    console.log(e.target.childNodes[0].data);
+
+    // imgタグを作る
+    var imgTag = document.createElement('img');
+    //console.log(imgTag);
+
+    // imgタグのsrc属性に画像ファイルを指定
+    imgTag.setAttribute('src','img/dino.png');
+    imgTag.setAttribute('alt','DINO');
+
+    // 一旦透明にしとく
+    imgTag.style.opacity = 0;
+
+
+    // 作ったimgタグをコンテナーに追加
+    container.appendChild(imgTag);
+    imgTag.setAttribute('class','fade-in');
+
+});
+
+
+document.querySelector("#stegoBtn").addEventListener('click', function(e){
+
+    // imgタグを作る
+    var imgTag = document.createElement('img');
+    //console.log(imgTag);
+
+    // imgタグのsrc属性に画像ファイルを指定
+    imgTag.setAttribute('src','img/stego.png');
+    imgTag.setAttribute('alt','stego');
+
+
+    // 作ったimgタグをコンテナーに追加
+    container.appendChild(imgTag);
+
+});
+
+
+
+// キャラクターを変数に保存
+var dinoImg = 'img/dino.png';
+var stegoImg = 'img/stego.png';
+var tiranoImg = 'img/tirano.png';
+var trikeraImg = 'img/trikera.png';
+
+
+// キャラクター配列
+// var charaImg = [];
+// charaImg[0] = 'img/dino.png';
+// charaImg[1] = 'img/stego.png';
+// charaImg[2] = 'img/tirano.png';
+// charaImg[3] = 'img/trikera.png';
+
+
+
+document.querySelector('#randomBtn').addEventListener('click',function(){
+
+    //ランダムな数字を作る
+    var randNum = Math.floor(Math.random() * charaImg.length);
+    //console.log(randNum);
+
+
+    var imgTag = document.createElement('img');
+    imgTag.setAttribute('src','img/'+ charaImg[randNum] +'.png');
+    imgTag.setAttribute('alt',charaImg[randNum]);
+    container.appendChild(imgTag);
+});
+
+
+// forループ
+for (var i = 0; i < 100; i+=1) {
+    console.log(i);
+}
+
+
+var charaImg = ['dino','stego','tirano','trikera'];
+// ALLボタン
+document.querySelector("#allBtn").addEventListener('click', function(){
+
+    for (var i = 0; i < charaImg.length; i++) {
+        var imgTag = document.createElement('img');
+        imgTag.setAttribute('src','img/'+ charaImg[i] +'.png');
+        imgTag.style.opacity = 0;
+        imgTag.style.animationDelay = i + "s";
+        container.appendChild(imgTag);
+        imgTag.setAttribute('class','fade-in');
+
+
+    }
+});
+
+
+
+</script>
+
+</body>
+</html>
